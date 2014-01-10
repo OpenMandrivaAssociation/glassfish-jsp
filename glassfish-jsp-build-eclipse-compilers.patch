@@ -1,0 +1,47 @@
+--- pom.xml.bak	2012-08-29 08:25:47.000000000 +0200
++++ pom.xml	2012-08-30 10:08:53.758735211 +0200
+@@ -134,12 +134,9 @@
+                 <configuration>
+                     <source>1.6</source>
+                     <target>1.6</target>
+-                    <compilerArgument>-Xlint:unchecked</compilerArgument>
++                    <!-- compilerArgument>-Xlint:unchecked</compilerArgument -->
+                     <excludes>
+                         <exclude>
+-                            org/apache/jasper/compiler/JDTJavaCompiler.java
+-                        </exclude>
+-                        <exclude>
+                             org/apache/jasper/compiler/AntJavaCompiler.java
+                         </exclude>
+                         <exclude>
+@@ -299,14 +296,13 @@
+             <version>2.2.1</version>
+         </dependency>
+ 
+-<!--
+-  Needed only if we include JDTJavaCompiler.java
++
+     <dependency>
+-      <groupId>eclipse</groupId>
+-      <artifactId>jdtcore</artifactId>
++      <groupId>org.eclipse.jdt</groupId>
++      <artifactId>core</artifactId>
+       <version>3.1.0</version>
++      <scope>provided</scope>
+-      <scope>compile</scope>
+     </dependency>
+--->
++
+     </dependencies>
+ </project>
+--- src/main/java/org/apache/jasper/compiler/JDTJavaCompiler.java.bak	2010-10-13 00:41:40.000000000 +0200
++++ src/main/java/org/apache/jasper/compiler/JDTJavaCompiler.java	2012-08-30 10:13:25.619637005 +0200
+@@ -248,6 +248,8 @@
+                 return className.toCharArray();
+             }
+             
++            public boolean ignoreOptionalProblems() {return false;}
++            
+             public char[] getContents() {
+                 char[] result = null;
+                 Reader reader = null;
