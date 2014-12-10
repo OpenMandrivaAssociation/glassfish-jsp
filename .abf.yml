@@ -1,2 +1,4 @@
+removed_sources:
+  javax.servlet.jsp-2.2.6.tar.xz: f72f778e871f0e8c3f41e923b69536825ec7f9de
 sources:
-  "javax.servlet.jsp-2.2.6.tar.xz": f72f778e871f0e8c3f41e923b69536825ec7f9de
+  javax.servlet.jsp-2.3.2.tar.xz: d67f304fcda845a937c0434956c9329493e01754

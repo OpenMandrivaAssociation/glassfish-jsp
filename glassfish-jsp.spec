@@ -1,13 +1,12 @@
 %{?_javapackages_macros:%_javapackages_macros}
 %global artifactId javax.servlet.jsp
-%global jspspec 2.2
+%global jspspec 2.3
 
 
 Name:       glassfish-jsp
-Version:    2.2.6
-Release:    11.0%{?dist}
+Version:    2.3.2
+Release:    5%{?dist}
 Summary:    Glassfish J2EE JSP API implementation
-
 
 License:    (CDDL or GPLv2 with exceptions) and ASL 2.0
 URL:        http://glassfish.org
@@ -19,15 +18,16 @@ Source2:    http://www.apache.org/licenses/LICENSE-2.0.txt
 Source3:    https://svn.java.net/svn/glassfish~svn/tags/legal-1.1/src/main/resources/META-INF/LICENSE.txt
 
 Patch0:     %{name}-build-eclipse-compilers.patch
+Patch1:     %{name}-port-to-servlet-3.1.patch
 
 BuildArch:  noarch
 
 BuildRequires:  maven-local
-BuildRequires:  glassfish-jsp-api
-BuildRequires:  mvn(javax.el:javax.el-api)
 BuildRequires:  mvn(javax.servlet:javax.servlet-api)
-BuildRequires:  mvn(net.java:jvnet-parent)
+BuildRequires:  mvn(javax.servlet.jsp:javax.servlet.jsp-api)
+BuildRequires:  mvn(net.java:jvnet-parent:pom:)
 BuildRequires:  mvn(org.eclipse.jdt:core)
+BuildRequires:  mvn(org.glassfish:javax.el)
 
 Provides:   jsp = %{jspspec}
 Provides:   jsp%{jspspec}
@@ -38,7 +38,7 @@ Requires:  glassfish-jsp-api
 
 %description
 This project provides a container independent implementation of JSP
-2.2. The main goals are:
+2.3. The main goals are:
   * Improves current implementation: bug fixes and performance
     improvements
   * Provides API for use by other tools, such as Netbeans
@@ -49,13 +49,13 @@ This project provides a container independent implementation of JSP
 %package javadoc
 Summary:    API documentation for %{name}
 
-
 %description javadoc
 %{summary}.
 
 %prep
 %setup -q -n %{artifactId}-%{version}
-%patch0
+%patch0 -p1
+%patch1 -p1
 cp -p %{SOURCE2} LICENSE
 cp -p %{SOURCE3} cddllicense.txt
 
@@ -95,6 +95,23 @@ popd
 
 
 %changelog
+* Mon Jun 9 2014 Alexander Kurtakov <akurtako@redhat.com> 2.3.2-5
+- Rebuild to regen osgi metadata.
+
+* Sat Jun 07 2014 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 2.3.2-4
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_21_Mass_Rebuild
+
+* Tue Mar 04 2014 Stanislav Ochotnicky <sochotnicky@redhat.com> - 2.3.2-3
+- Use Requires: java-headless rebuild (#1067528)
+
+* Thu Jan 02 2014 Michal Srb <msrb@redhat.com> - 2.3.2-2
+- Regenerate BR
+
+* Thu Jan 02 2014 Michal Srb <msrb@redhat.com> - 2.3.2-1
+- Update to upstream version 2.3.2
+- Port to servlet 3.1
+- Drop group tag
+
 * Mon Aug 05 2013 Stanislav Ochotnicky <sochotnicky@redhat.com> - 2.2.6-11
 - Add javax.servlet.jsp directory and provides
 
@@ -145,3 +162,4 @@ popd
 
 * Wed Mar 21 2012 Stanislav Ochotnicky <sochotnicky@redhat.com> - 2.2.1-1
 - Initial version of the package
+
