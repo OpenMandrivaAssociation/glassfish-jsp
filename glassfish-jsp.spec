@@ -5,9 +5,9 @@
 
 Name:       glassfish-jsp
 Version:    2.3.2
-Release:    5%{?dist}
+Release:    5.1
 Summary:    Glassfish J2EE JSP API implementation
-
+Group:	    Development/Java
 License:    (CDDL or GPLv2 with exceptions) and ASL 2.0
 URL:        http://glassfish.org
 Source0:    %{artifactId}-%{version}.tar.xz
