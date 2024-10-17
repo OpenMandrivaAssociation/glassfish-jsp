@@ -9,7 +9,7 @@ Release:    5.3
 Summary:    Glassfish J2EE JSP API implementation
 Group:	    Development/Java
 License:    (CDDL or GPLv2 with exceptions) and ASL 2.0
-URL:        http://glassfish.org
+URL:        https://glassfish.org
 Source0:    %{artifactId}-%{version}.tar.xz
 # no source releases, but this will generate tarball for you from an
 # SVN tag
